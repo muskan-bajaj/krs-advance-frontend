@@ -30,13 +30,13 @@
     padding-top: 20px;
 }
 
-.email, .password{
+.input{
     display: flex;
     flex-direction: column;
     padding-top: 10px;
 }
 
-.email label, .password label{
+.input label{
     color: #FFF;
     font-size: 16px;
     font-style: normal;
@@ -45,7 +45,7 @@
     letter-spacing: 0.16px;
 }
 
-.email input, .password input{
+.input input{
     background-color: transparent;
     border-radius: 4px;
     border: 0.833px solid #D4D7E3;
@@ -64,6 +64,7 @@
     display: flex;
     justify-content: space-between;
     padding: 10px 0px;
+    cursor: pointer;
 }
 
 .signIn{
@@ -101,4 +102,15 @@
     line-height: 100%;
     letter-spacing: 0.16px;
     padding-top: 20px;
+}
+
+.highlighted{
+    color: #FFA97C;
+    cursor: pointer;
+}
+
+.error{
+    color: red;
+    text-align: center;
+    
 }
