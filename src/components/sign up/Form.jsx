@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import "./Form.css";
 
@@ -14,6 +15,8 @@ export default function Form() {
   const [rePass, setRePass] = useState("");
   const [error, setError] = useState(false);
   const [errorName, setErrorName] = useState("");
+
+  const redirect = useNavigate();
 
   const signUp = () => {
     if (
@@ -161,7 +164,16 @@ export default function Form() {
         </button>
       </div>
       <div className="existing">
-        Already have an account?<span className="highlighted"> Sign in</span>
+        Already have an account?
+        <span
+          className="highlighted"
+          onClick={() => {
+            redirect("/login");
+          }}
+        >
+          {" "}
+          Sign in
+        </span>
       </div>
       <div className="copyright">© 2023 ALL RIGHTS RESERVED</div>
     </div>
