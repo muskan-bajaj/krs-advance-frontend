@@ -11,15 +11,30 @@ export default function Form() {
 
   const redirect = useNavigate();
 
-  const signIn = () => {
+  const signIn = async () => {
     if (email !== "" && password !== "") {
       if (email.includes("@")) {
         let data = { email: email, password: password };
-        console.log(data);
-        setError(false);
-        setErrorName("");
-        setEmail("");
-        setPassword("");
+        const response = await fetch("http://localhost:5000/user/login", {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (response.ok) {
+          setError(false);
+          setErrorName("");
+          setEmail("");
+          setPassword("");
+          localStorage.setItem("isLoggedIn", true);
+          const responseData = await response.json();
+          localStorage.setItem("token", responseData.token);
+          redirect("/");
+        } else {
+          setErrorName("LOgin unsuccessful");
+          setError(true);
+        }
       } else {
         setErrorName("Invalid Credentials");
         setError(true);

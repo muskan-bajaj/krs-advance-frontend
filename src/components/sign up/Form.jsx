@@ -18,7 +18,7 @@ export default function Form() {
 
   const redirect = useNavigate();
 
-  const signUp = () => {
+  const signUp = async () => {
     if (
       userData.name !== "" &&
       userData.image !== "" &&
@@ -33,17 +33,33 @@ export default function Form() {
           if (userData.password === rePass) {
             if (userData.phone.length === 10) {
               console.log(userData);
-              setError(false);
-              setErrorName("");
-              setRePass("");
-              setUserData({
-                name: "",
-                image: "",
-                email: "",
-                password: "",
-                phone: "",
-                dob: "",
-              });
+              const response = await fetch(
+                "http://localhost:5000/user/register",
+                {
+                  method: "POST",
+                  body: JSON.stringify(userData),
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                }
+              );
+              // console.log(response);
+              if (response.ok) {
+                setError(false);
+                setErrorName("");
+                setRePass("");
+                setUserData({
+                  name: "",
+                  image: "",
+                  email: "",
+                  password: "",
+                  phone: "",
+                  dob: "",
+                });
+              } else {
+                setErrorName("signup unsuccessful");
+                setError(true);
+              }
             } else {
               setErrorName("Phone no. should be of 10 digits");
               setError(true);
